@@ -506,9 +506,11 @@ void init_bg(World* world){
 	
 	if(world->evening==TRUE){
 		world->skybox.texture = load_texture("textures\\sky1.png");
+		glBindTexture(GL_TEXTURE_2D, world->skybox.texture);
 		world->evening = false;
 	}else{
 		world->skybox.texture = load_texture("textures\\sky.png");
+		glBindTexture(GL_TEXTURE_2D, world->skybox.texture2);
 		world->evening=true;
 	}
 }
@@ -518,11 +520,10 @@ void init_entities(World* world){
 	for(int i=0; i<7; i++){
 		char buffer[1024];
 		snprintf(buffer, sizeof(buffer), "textures\\%d.png", i);
-		if(i==6)
+		if(i==5)
 			load_model("objects\\deathstar.obj", &world->entities[i].model);
-		if(i==7){
+		if(i==6){
 			load_model("objects\\falcon.obj", &world->entities[i].model);
-			world->entities[i].texture = load_texture("textures\\falcon.png");
 			scale_model (&world->entities[i].model, 0.3, 0.3, 0.3);
 		}
 		else
@@ -546,11 +547,9 @@ void init_entities(World* world){
 			scale_model (&world->entities[i].model, 1.7, 1.7, 1.7);
 		}
 		world->entities[i].texture = load_texture(buffer);
+		glBindTexture(GL_TEXTURE_2D, world->entities[i].texture);
 	}
-
-	/*
-	load_model("objects\\falcon.obj", &world->falcon.model);
-	world->falcon.texture = load_texture("textures\\falcon.png");
-	scale_model (&world->falcon.model, 0.3, 0.3, 0.3);*/
+	
+	init_bg(world);
 
 }

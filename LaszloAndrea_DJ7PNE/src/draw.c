@@ -224,7 +224,7 @@ void draw_environment(World world, Rotate* rotate, Move move ){
 				glTranslatef(0,0,0);
 				glRotatef(rotate->sun_rotation, 1, 1, 1);
 			}
-			if(i==7){
+			if(i==6){
 				glTranslatef(move.falcon.x,move.falcon.y,move.falcon.z);
 				glRotatef(90, 1, 0, 0);
 				glRotatef(270, 0, 1, 0);
@@ -241,26 +241,13 @@ void draw_environment(World world, Rotate* rotate, Move move ){
 				glTranslatef (move.earth.x+1000,move.earth.y+1000,move.earth.z-100);
 			glMaterialfv(GL_FRONT, GL_AMBIENT, world.entities[i].material_ambient );
 			glBindTexture(GL_TEXTURE_2D, world.entities[i].texture);
-			if(i!=7 && i!=0)
-				glRotatef(rotate->earth_rotation, 0, 0, 1);
+			if(i!=6 && i!=0)
+				glRotatef(rotate->earth_rotation-50, 0, 0, 1);
 			
 			draw_model(&world.entities[i].model);
 
 		glPopMatrix();
 	}
-
-	/*//Draw the falcon.
-    glPushMatrix();
-
-        glTranslatef(move.falcon.x,move.falcon.y,move.falcon.z);
-     	glMaterialfv(GL_FRONT, GL_AMBIENT, world.falcon.material_ambient);
-        glBindTexture(GL_TEXTURE_2D, world.falcon.texture);
-        glRotatef(90, 1, 0, 0);
-        glRotatef(270, 0, 1, 0);
-        draw_model(&world.falcon.model);
-
-   glPopMatrix();*/
-
 
 }
 

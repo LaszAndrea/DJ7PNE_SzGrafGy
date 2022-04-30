@@ -136,9 +136,6 @@ void move_camera_backward(struct Camera* camera, double distance, Move* move)
 	camera->position.x -= cos(angle) * distance;
 	camera->position.y -= sin(angle) * distance;
 
-
-	//gluLookAt(camera->position.x, camera->position.y , camera->position.z, move->falcon.x+10, move->falcon.y+10, move->falcon.z+10, 0, 1, 0);
-
 }
 
 void move_camera_forward(struct Camera* camera, double distance)
