@@ -10,7 +10,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <stdbool.h>
-#include <GL/glext.h>
 
 #define resolution 1   // 1: 1920*1080   0: 1366*768
 #define fullscreen 1   // 1: fullscreen  0: windowed
@@ -57,7 +56,7 @@ double degree = 0;
 double distance_a = 4000;
 double distance_b = 2000;
 int falcon=0;
-int evening=0;
+int evening=1;
 
 double calc_elapsed_time()
 {
@@ -186,7 +185,6 @@ GLuint load_texture(char* filename)
 		Mode = GL_RGBA;
 	}
  
-    //glBindTexture(GL_TEXTURE_2D, texture_name);
 	glTexImage2D(GL_TEXTURE_2D, 0, Mode, Surface->w, Surface->h, 0, Mode, GL_UNSIGNED_BYTE, Surface->pixels);
  
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -264,7 +262,7 @@ void changeTex(Move* move){
 	if(move->moon.x > 3300.959325){
 		if(move->moon.x < 3301.3056){			
 			if(world.evening==TRUE){
-				world.skybox.texture2;
+				init_bg_wt(&world);
 				world.evening = false;
 				evening=0;
 			}
@@ -273,7 +271,7 @@ void changeTex(Move* move){
 	if(move->moon.x >  4699.893386){
 		if(move->moon.x <  4699.973346){			
 			if(world.evening==false){
-				world.skybox.texture;
+				init_bg_wt(&world);
 				world.evening=true;
 				evening=1;
 			}
@@ -360,7 +358,7 @@ void motion_handler(int x, int y)
 
 void key_handler(unsigned char key, int x, int y)
 {
-
+	
 	switch (key) {
 	case 'w':
 		action.move_forward = TRUE;
@@ -397,23 +395,17 @@ void key_handler(unsigned char key, int x, int y)
 		else action.move_earth_in_galaxy = FALSE;
 		break;
 	case 'n':
-		printf("\n if-en kivul: %d", evening);
-		if(evening == 0){
+		if(world.evening == true){
 			world.evening == false;
 			evening = 1;
 			light_ambient[0] = light_ambient[1] = light_ambient[2] += 0.1;
-			glBindTexture(GL_TEXTURE_2D, world.skybox.texture);
-			world.skybox.texture;
-			printf("\n ifen belul: %d", evening);
 		}else{
 			world.evening == true;
 			evening=0;
 			light_ambient[0] = light_ambient[1] = light_ambient[2] -= 0.05;
-			glBindTexture(GL_TEXTURE_2D, world.skybox.texture2);
-			world.skybox.texture2;
-			printf("\n elsen belul: %d", evening);
 		}
-		//init_bg(&world);
+		init_bg_wt(&world);
+		break;
 	case 'f':
 		if (action.call_falcon == FALSE){
 			action.call_falcon = TRUE;

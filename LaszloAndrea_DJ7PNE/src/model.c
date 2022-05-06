@@ -505,15 +505,27 @@ int load_model(const char* filename, Model* model)
 void init_bg(World* world){
 	
 	if(world->evening==TRUE){
-		world->skybox.texture = load_texture("textures\\sky1.png");
+		world->skybox.texture = load_texture("textures\\sky.png");
 		glBindTexture(GL_TEXTURE_2D, world->skybox.texture);
 		world->evening = false;
 	}else{
-		world->skybox.texture = load_texture("textures\\sky.png");
+		world->skybox.texture2 = load_texture("textures\\sky1.png");
 		glBindTexture(GL_TEXTURE_2D, world->skybox.texture2);
 		world->evening=true;
 	}
 }
+
+void init_bg_wt(World* world){
+	
+	if(world->evening==TRUE){
+		world->skybox.texture;
+		world->evening = false;
+	}else{
+		world->skybox.texture2;
+		world->evening=true;
+	}
+}
+
 
 void init_entities(World* world){
 
@@ -524,31 +536,19 @@ void init_entities(World* world){
 			load_model("objects\\deathstar.obj", &world->entities[i].model);
 		if(i==6){
 			load_model("objects\\falcon.obj", &world->entities[i].model);
-			scale_model (&world->entities[i].model, 0.3, 0.3, 0.3);
 		}
 		else
 			load_model("objects\\geoid.obj", &world->entities[i].model);
-		if(i==1){
-			scale_model (&world->entities[i].model, 0.2, 0.2, 0.2);
-		}
-		else if(i==2){ 
-			scale_model (&world->entities[i].model, 0.3, 0.3, 0.3);
-		}
-		else if(i==3){
-			scale_model (&world->entities[i].model, 0.4, 0.4, 0.4);
-		}
-		else if(i==4){
-			scale_model (&world->entities[i].model, 0.25, 0.25, 0.25);
-		}
-		else if(i==5){
-			scale_model (&world->entities[i].model, 0.4, 0.4, 0.4);
-		}
-		else if(i==0){
-			scale_model (&world->entities[i].model, 1.7, 1.7, 1.7);
-		}
 		world->entities[i].texture = load_texture(buffer);
-		glBindTexture(GL_TEXTURE_2D, world->entities[i].texture);
 	}
+	
+	scale_model (&world->entities[1].model, 0.2, 0.2, 0.2);
+	scale_model (&world->entities[2].model, 0.3, 0.3, 0.3);
+	scale_model (&world->entities[3].model, 0.4, 0.4, 0.4);
+	scale_model (&world->entities[4].model, 0.25, 0.25, 0.25);
+	scale_model (&world->entities[5].model, 0.4, 0.4, 0.4);
+	scale_model (&world->entities[0].model, 1.7, 1.7, 1.7);
+	scale_model (&world->entities[6].model, 0.3, 0.3, 0.3);
 	
 	init_bg(world);
 

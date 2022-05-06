@@ -5,6 +5,8 @@
 #include <math.h>
 #include "camera.h"
 
+World world;
+
 void draw_triangles(const struct Model* model)
 {
 	int i, k;
@@ -106,6 +108,7 @@ void draw_model(const struct Model* model)
 
 void draw_skybox_bottom(Entity skybox)
 {
+	
     double theta, phi1, phi2;
     double x1, y1, z1;
     double x2, y2, z2;
@@ -120,7 +123,14 @@ void draw_skybox_bottom(Entity skybox)
     radius = SKYBOX_SIZE;
 
     glPushMatrix();
-    glBindTexture(GL_TEXTURE_2D, skybox.texture);
+	if(world.evening == true){
+			glBindTexture(GL_TEXTURE_2D, skybox.texture);
+			world.evening = false;
+	}else{
+			glBindTexture(GL_TEXTURE_2D, skybox.texture2);
+			world.evening = true;
+	}
+	
     glScaled(radius, radius, radius);
 
     glColor3f(1, 1, 1);
@@ -170,7 +180,14 @@ void draw_skybox_top(Entity skybox)
     radius = SKYBOX_SIZE;
 
     glPushMatrix();
-    glBindTexture(GL_TEXTURE_2D, skybox.texture);
+	if(world.evening == true){
+		glBindTexture(GL_TEXTURE_2D, skybox.texture2);
+		world.evening = false;
+	}else{
+		glBindTexture(GL_TEXTURE_2D, skybox.texture);
+		world.evening = true;
+	}
+	
     glScaled(radius, radius, radius);
 
     glColor3f(1, 1, 1);
