@@ -1,0 +1,5 @@
+Ez a grafikai program egy világuniverzumot ábrázol, néhány extrával. Annak érdeklben készült, hogy esetlegesen a földrajz órákat interaktívabbá lehessen tenni.
+Nyílt titok, hogy a gyerekek figyelmét sokkal jobban fel lehet hívni egy interaktív, vagy szemléletes dologgal, nem pedig a száraz tényekkel.
+Ebben a programban a naphoz legközelebb eső bolygókat, illetve a Föld holdját lehet látni, illetve, hogy még érdekesebb legyen a program, néhány Star Wars referenciát is
+láthatunk benne, elrejtve.
+A program kezelése egyszerű, akár a gyerekek is kipróbálhatják, felhasználói segítség is van a programban, egy gombnyomásra.
